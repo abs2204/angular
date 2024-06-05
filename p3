@@ -1,0 +1,44 @@
+//index.htmlp2intemplate
+<html>
+<head>
+    <title>Fruit and Student List</title>
+</head>
+<body>
+    <h1>List of Fruits</h1>
+    <ul>
+        <li>Apple</li>
+        <li>Orange</li>
+        <li>Banana</li>
+        <li>Mango</li>
+        <li>Strawberry</li>
+    </ul>
+    <h1>List of Selected Students</h1>
+    <ol>
+        <li>John</li>
+        <li>Alice</li>
+        <li>Michael</li>
+        <li>Sarah</li>
+        <li>David</li>
+    </ol>
+</body>
+</html>
+//views.pyinp2app
+from django.http import HttpResponse
+from django.shortcuts import render
+
+
+def homepage(request):
+    
+    return render(request,"index.html")
+
+//urls.pyinp2
+
+from django.contrib import admin
+from django.urls import path
+from P2App import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.homepage),
+]
+//settings.py  'DIRS': ['templates'],
