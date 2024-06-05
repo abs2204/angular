@@ -1,0 +1,32 @@
+//views.pyinP3App
+from django.http import HttpResponse
+from datetime import datetime,timedelta
+
+def current_datetime_view(request):
+    # Get the current date and time
+    now = datetime.now()
+    # Return the current date and time as plain text
+    return HttpResponse(f"Current Date and Time: {now}")
+
+
+def datetime_with_offsets(request):
+    now = datetime.now()
+    offset_hours = 4
+    # Calculate dates with offsets
+    four_hours_ahead = now + timedelta(hours=offset_hours)
+    four_hours_before = now - timedelta(hours=offset_hours)
+    html = f"<html><body><h1>Current Date and Time with Offsets:</h1>" \
+    f"<p>Current: {now}</p>" \
+    f"<p>Four Hours Ahead: {four_hours_ahead}</p>" \
+    f"<p>Four Hours Before: {four_hours_before}</p></body></html>"
+    return HttpResponse(html)
+ //urls.pyinP3
+from django.contrib import admin
+from django.urls import path
+from P3App import views as v
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('d1/', v.current_datetime_view, name='cdr'),
+    path('d2/',v.datetime_with_offsets,name='dwo'),
+]
