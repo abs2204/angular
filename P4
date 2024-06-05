@@ -1,0 +1,84 @@
+//urls.pyinP1
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',include('P1App.urls'))
+]
+//settings.py installedapps='P1App',
+
+//layout.htmlin template
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/home/">Home</a></li>
+                <li><a href="/abot/">About Us</a></li>
+                <li><a href="/contact/">Contact Us</a></li>
+                <!-- Add more navigation links as needed -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {% now "Y" %} Your Website. All rights reserved.</p>
+        <p>Developed by Your Name</p>
+    </footer>
+</body>
+</html>
+//abot.html
+{% extends 'layout.html' %}
+
+{% block title %}About Us - Your Website{% endblock %}
+
+{% block content %}
+    <h1>About Us</h1>
+    <!-- Add about us content here -->
+{% endblock %}
+//contact.html
+{% extends 'layout.html' %}
+
+{% block title %}Contact Us - Your Website{% endblock %}
+
+{% block content %}
+    <h1>Contact Us</h1>
+    <!-- Add contact us content here -->
+{% endblock %}
+//home.html
+{% extends 'layout.html' %}
+
+{% block title %}Home - Your Website{% endblock %}
+
+{% block content %}
+    <h1>Welcome to Our Website!</h1>
+    <!-- Add home page content here -->
+{% endblock %}
+//views.pyinP1App
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'home.html')
+
+def abot(request):
+    return render(request, 'abot.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
+//urls.pyinP1App
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('home/', views.home, name='home'),
+    path('abot/', views.abot, name='abot'),
+    path('contact/', views.contact, name='contact'),
+    # Add more URL patterns as needed
+]
